@@ -1,17 +1,15 @@
 package com.youcheng.demo.service;
 
 import com.youcheng.demo.controller.vo.AddUserVo;
-import com.youcheng.demo.entity.UserEntity;
-import com.youcheng.demo.repo.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
