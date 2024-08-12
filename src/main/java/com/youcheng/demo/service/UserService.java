@@ -38,7 +38,7 @@ public class UserService {
     }
 
 
-    private Map<String, List<String>> loadAccessData() throws IOException {
+    Map<String, List<String>> loadAccessData() throws IOException {
         Map<String, List<String>> accessMap = new HashMap<>();
 
         if (Files.exists(Paths.get(ACCESS_FILE))) {
@@ -56,7 +56,7 @@ public class UserService {
         return accessMap;
     }
 
-    private void saveAccessData(Map<String, List<String>> accessMap) throws IOException {
+    void saveAccessData(Map<String, List<String>> accessMap) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ACCESS_FILE))) {
             for (Map.Entry<String, List<String>> entry : accessMap.entrySet()) {
                 writer.write(entry.getKey() + ":" + String.join(",", entry.getValue()));

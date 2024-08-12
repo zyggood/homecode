@@ -13,13 +13,12 @@ public class RoleInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String authHeader = request.getHeader("Authorization");
-        if (authHeader == null || !authHeader.startsWith("Basic ")) {
+        if (authHeader == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return false;
         }
 
-        String base64Credentials = authHeader.substring(6);
-        String credentials = new String(Base64.getDecoder().decode(base64Credentials));
+        String credentials = new String(Base64.getDecoder().decode(authHeader));
         // format userId:accountName:role
         String[] parts = credentials.split(":");
 

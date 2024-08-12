@@ -1,5 +1,6 @@
 package com.youcheng.demo.controller;
 
+import com.youcheng.demo.aspect.RoleRequired;
 import com.youcheng.demo.controller.vo.AddUserVo;
 import com.youcheng.demo.service.UserService;
 import jakarta.annotation.Resource;
@@ -8,13 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
 
 @RestController
 public class UserController {
@@ -24,11 +19,8 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/admin/addUser")
+    @RoleRequired("admin")
     public ResponseEntity<?> addUserAccess(@RequestBody AddUserVo body, HttpServletRequest request) throws IOException {
-        String role = (String) request.getAttribute("role");
-        if (!"admin".equals(role)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("You do not have access to this endpoint.");
-        }
 
         userService.addUserAccess(body);
 
